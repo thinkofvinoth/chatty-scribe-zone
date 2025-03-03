@@ -1,8 +1,9 @@
 
 import React, { useState } from 'react';
-import { Send } from 'lucide-react';
+import { Send, User } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 interface ChatInputProps {
   onSendMessage: (message: string) => void;
@@ -11,6 +12,7 @@ interface ChatInputProps {
 
 const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, disabled = false }) => {
   const [message, setMessage] = useState("");
+  const [isFocused, setIsFocused] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,10 +30,21 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, disabled = false }
         disabled && "opacity-60"
       )}
     >
+      {(isFocused || message) && (
+        <Avatar className="h-9 w-9 border shadow-sm bg-primary/10 transition-all duration-300 animate-fade-in">
+          <AvatarImage src="/placeholder.svg" alt="User" />
+          <AvatarFallback className="bg-primary text-primary-foreground">
+            <User size={18} />
+          </AvatarFallback>
+        </Avatar>
+      )}
+      
       <div className="relative flex-1">
         <textarea
           value={message}
           onChange={(e) => setMessage(e.target.value)}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
           placeholder="Type a message..."
           className="w-full resize-none rounded-xl border border-input bg-background/60 px-4 py-3 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring pr-10 min-h-[80px] max-h-[200px] transition-colors"
           rows={2}

@@ -1,11 +1,47 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ChatContainer from '@/components/ChatContainer';
+import { Moon, Sun } from 'lucide-react';
+import { Button } from "@/components/ui/button";
 
 const Index = () => {
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+
+  useEffect(() => {
+    // Check for system preference or saved preference
+    const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (savedTheme) {
+      setTheme(savedTheme);
+      document.documentElement.classList.toggle('dark', savedTheme === 'dark');
+    } else if (prefersDark) {
+      setTheme('dark');
+      document.documentElement.classList.add('dark');
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    document.documentElement.classList.toggle('dark', newTheme === 'dark');
+    localStorage.setItem('theme', newTheme);
+  };
+
   return (
-    <div className="min-h-screen w-full flex flex-col p-4 md:p-8 bg-gradient-to-b from-background via-background/95 to-secondary/20">
-      <header className="container mx-auto mb-6 text-center">
+    <div className="min-h-screen w-full flex flex-col p-4 md:p-8 bg-gradient-to-b from-background via-background/95 to-secondary/20 transition-colors duration-300">
+      <header className="container mx-auto mb-6 text-center relative">
+        <div className="absolute right-4 top-0">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={toggleTheme}
+            className="rounded-full h-10 w-10 bg-secondary/50 hover:bg-secondary transition-colors"
+            aria-label="Toggle theme"
+          >
+            {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
+          </Button>
+        </div>
         <div className="inline-block px-3 py-1 mb-2 text-xs font-medium rounded-full bg-primary/10 text-primary animate-fade-in">
           Enhanced Chat Experience
         </div>
