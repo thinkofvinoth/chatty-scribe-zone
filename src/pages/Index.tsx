@@ -4,21 +4,21 @@ import ChatContainer from '@/components/ChatContainer';
 
 const Index = () => {
   return (
-    <div className="min-h-screen w-full flex flex-col p-6 md:p-10 bg-gradient-to-b from-background to-secondary/20">
-      <header className="container mx-auto mb-8 text-center">
+    <div className="min-h-screen w-full flex flex-col p-4 md:p-8 bg-gradient-to-b from-background via-background/95 to-secondary/20">
+      <header className="container mx-auto mb-6 text-center">
         <div className="inline-block px-3 py-1 mb-2 text-xs font-medium rounded-full bg-primary/10 text-primary animate-fade-in">
-          Minimal Chat Experience
+          Enhanced Chat Experience
         </div>
-        <h1 className="text-3xl md:text-4xl font-bold tracking-tight">
+        <h1 className="text-3xl md:text-4xl font-bold tracking-tight bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
           Interactive AI Chat
         </h1>
         <p className="mt-2 text-muted-foreground max-w-xl mx-auto">
-          A beautifully designed chat interface with smooth animations and responsive design.
+          A beautifully designed chat interface with smooth animations and responsive design
         </p>
       </header>
       
-      <main className="container mx-auto flex-1 flex items-center justify-center py-6">
-        <div className="w-full max-w-3xl h-[70vh] md:h-[600px] animate-scale-in">
+      <main className="container mx-auto flex-1 flex items-center justify-center py-4">
+        <div className="w-full max-w-3xl h-[75vh] md:h-[600px] animate-scale-in shadow-xl">
           <ChatContainer />
         </div>
       </main>

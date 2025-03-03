@@ -33,7 +33,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, disabled = false }
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Type a message..."
-          className="w-full resize-none rounded-xl border border-input bg-background px-4 py-3 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring pr-10 min-h-[80px] max-h-[200px]"
+          className="w-full resize-none rounded-xl border border-input bg-background/60 px-4 py-3 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring pr-10 min-h-[80px] max-h-[200px] transition-colors"
           rows={2}
           disabled={disabled}
           onKeyDown={(e) => {
@@ -47,7 +47,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, disabled = false }
           type="submit"
           size="icon"
           disabled={!message.trim() || disabled}
-          className="absolute bottom-3 right-3 h-8 w-8 rounded-full transition-transform hover:scale-105 active:scale-95"
+          className="absolute bottom-3 right-3 h-8 w-8 rounded-full transition-all hover:scale-105 active:scale-95 bg-primary hover:bg-primary/90"
         >
           <Send className="h-4 w-4" />
           <span className="sr-only">Send message</span>

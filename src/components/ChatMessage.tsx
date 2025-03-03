@@ -2,6 +2,7 @@
 import React from 'react';
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Bot, User } from 'lucide-react';
 
 export interface ChatMessageProps {
   message: string;
@@ -19,23 +20,25 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
   return (
     <div
       className={cn(
-        "flex w-full items-start gap-2 py-2 animate-slide-in",
+        "flex w-full items-start gap-3 py-2 animate-slide-in",
         isUser ? "justify-end" : "justify-start"
       )}
     >
       {!isUser && (
-        <Avatar className="h-8 w-8 border shadow-sm">
+        <Avatar className="h-9 w-9 border shadow-sm bg-indigo-100">
           <AvatarImage src="/placeholder.svg" alt="AI" />
-          <AvatarFallback>AI</AvatarFallback>
+          <AvatarFallback className="bg-indigo-500 text-primary-foreground">
+            <Bot size={18} />
+          </AvatarFallback>
         </Avatar>
       )}
       
       <div
         className={cn(
-          "max-w-[80%] rounded-2xl px-4 py-2 shadow-sm",
+          "max-w-[80%] rounded-2xl px-4 py-3 shadow-sm",
           isUser 
-            ? "bg-primary text-primary-foreground" 
-            : "bg-secondary text-secondary-foreground"
+            ? "bg-gradient-to-r from-primary to-primary/90 text-primary-foreground" 
+            : "bg-gradient-to-r from-secondary/80 to-secondary/60 text-secondary-foreground"
         )}
       >
         {isTyping ? (
@@ -47,7 +50,7 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
             </div>
           </div>
         ) : (
-          <p className="text-sm leading-relaxed">{message}</p>
+          <p className="text-sm leading-relaxed whitespace-pre-wrap">{message}</p>
         )}
         <span className="text-xs opacity-70 block mt-1">
           {timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
@@ -55,9 +58,11 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
       </div>
 
       {isUser && (
-        <Avatar className="h-8 w-8 border shadow-sm">
+        <Avatar className="h-9 w-9 border shadow-sm bg-primary/10">
           <AvatarImage src="/placeholder.svg" alt="User" />
-          <AvatarFallback>You</AvatarFallback>
+          <AvatarFallback className="bg-primary text-primary-foreground">
+            <User size={18} />
+          </AvatarFallback>
         </Avatar>
       )}
     </div>

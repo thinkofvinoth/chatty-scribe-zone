@@ -5,6 +5,7 @@ import ChatInput from './ChatInput';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
+import { Bot } from 'lucide-react';
 
 interface Message {
   id: string;
@@ -85,11 +86,13 @@ const ChatContainer: React.FC = () => {
   };
   
   return (
-    <div className="flex flex-col h-full max-w-3xl mx-auto rounded-2xl overflow-hidden border shadow-sm bg-card">
-      <div className="p-4 flex items-center gap-3 border-b">
+    <div className="flex flex-col h-full max-w-3xl mx-auto rounded-2xl overflow-hidden border shadow-md bg-gradient-to-b from-card to-card/80 backdrop-blur-sm">
+      <div className="p-4 flex items-center gap-3 border-b bg-secondary/30">
         <Avatar>
           <AvatarImage src="/placeholder.svg" alt="AI" />
-          <AvatarFallback>AI</AvatarFallback>
+          <AvatarFallback className="bg-indigo-500 text-white">
+            <Bot size={18} />
+          </AvatarFallback>
         </Avatar>
         <div>
           <h2 className="font-medium">AI Assistant</h2>
@@ -97,8 +100,8 @@ const ChatContainer: React.FC = () => {
         </div>
       </div>
       
-      <ScrollArea ref={scrollAreaRef} className="flex-1 p-4">
-        <div className="flex flex-col gap-2 pb-4">
+      <ScrollArea ref={scrollAreaRef} className="flex-1 p-4 bg-secondary/10">
+        <div className="flex flex-col gap-3 pb-4">
           {messages.map((message) => (
             <ChatMessage
               key={message.id}
@@ -121,7 +124,7 @@ const ChatContainer: React.FC = () => {
       
       <Separator />
       
-      <div className="p-4">
+      <div className="p-4 bg-card/40">
         <ChatInput 
           onSendMessage={handleSendMessage} 
           disabled={isTyping}
